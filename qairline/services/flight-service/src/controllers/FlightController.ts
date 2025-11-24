@@ -2,7 +2,10 @@
 import { Request, Response } from 'express';
 import connection from '../database/database';
 import { Flight, CreateFlightRequest } from '../types/flight';
+import { sendEmail } from '../services/EmailService';
+import { cacheService } from '../services/CacheService';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 export class FlightController {
   private userServiceUrl: string;
@@ -12,7 +15,16 @@ export class FlightController {
   }
 
   // Lay tat ca flights (public - guest co the xem)
-  getAllFlights(req: Request, res: Response): void {
+  async getAllFlights(req: Request, res: Response): Promise<void> {
+    const cacheKey = 'flights:all';
+    
+    // Try to get from cache first
+    const cachedData = await cacheService.get(cacheKey);
+    if (cachedData) {
+      res.json(JSON.parse(cachedData));
+      return;
+    }
+
     const query = `
       SELECT 
         f.FlightID, 
@@ -28,11 +40,15 @@ export class FlightController {
       JOIN Aircrafts a ON f.AircraftTypeID = a.AircraftID
     `;
     
-    connection.query(query, (err, results) => {
+    connection.query(query, async (err, results) => {
       if (err) {
         console.error('Error executing query:', err.stack);
         return res.status(500).send('Internal Server Error');
       }
+      
+      // Save to cache for 5 minutes
+      await cacheService.set(cacheKey, JSON.stringify(results), 300);
+      
       res.json(results);
     });
   }
@@ -41,14 +57,14 @@ export class FlightController {
   async createFlight(req: Request, res: Response): Promise<void> {
     const { model, departure, arrival, departureTime, arrivalTime, price, seatsAvailable, status, userID, aircraftTypeId } = req.body;
 
-    // Buoc 1: Validate input
+    // Validate input
     if (!departure || !arrival || !departureTime || !arrivalTime || !price || seatsAvailable == null || !userID) {
       res.status(400).json({ message: 'Missing required fields' });
       return;
     }
 
     try {
-      // Buoc 2: Kiem tra user co phai Admin khong via User Service
+      // Kiem tra user co phai Admin khong via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
       
       if (userRoleResponse.data.role !== 'Admin') {
@@ -56,7 +72,7 @@ export class FlightController {
         return;
       }
 
-      // Buoc 3: Neu truyen model, lay AircraftTypeID tu model name
+      // Neu truyen model, lay AircraftTypeID tu model name
       if (model && !aircraftTypeId) {
         const getAircraftQuery = 'SELECT AircraftID FROM Aircrafts WHERE Model = ?';
         connection.query(getAircraftQuery, [model], (err, results: any) => {
@@ -75,7 +91,7 @@ export class FlightController {
           this.insertFlight(res, aircraftTypeIdFromModel, departure, arrival, departureTime, arrivalTime, price, seatsAvailable, status);
         });
       } else {
-        // Buoc 4: Neu da co aircraftTypeId, tao flight luon
+        // Neu da co aircraftTypeId, tao flight luon
         this.insertFlight(res, aircraftTypeId, departure, arrival, departureTime, arrivalTime, price, seatsAvailable, status);
       }
     } catch (error: any) {
@@ -108,12 +124,15 @@ export class FlightController {
     connection.execute(
       query,
       [aircraftTypeId, departure, arrival, departureTime, arrivalTime, price, seatsAvailable, status || 'scheduled'],
-      (err, result: any) => {
+      async (err, result: any) => {
         if (err) {
           console.error('Error creating flight:', err);
           res.status(500).json({ message: 'Error creating flight', error: err.message });
           return;
         }
+
+        // Invalidate cache
+        await cacheService.delPattern('flights:*');
 
         res.status(201).json({
           message: 'Flight added successfully',
@@ -162,12 +181,16 @@ export class FlightController {
 
         // Buoc 4: Update flight status
         const updateQuery = 'UPDATE Flights SET Status = ? WHERE FlightID = ?';
-        connection.execute(updateQuery, [status, flightId], (err, result: any) => {
+        connection.execute(updateQuery, [status, flightId], async (err, result: any) => {
           if (err) {
             console.error('Error updating flight status:', err);
             res.status(500).json({ message: 'Error updating flight status', error: err.message });
             return;
           }
+
+          // Invalidate cache
+          await cacheService.delPattern('flights:*');
+          await cacheService.del(`flight:${flightId}`);
 
           res.status(200).json({ message: 'Flight status updated successfully' });
         });
@@ -220,12 +243,16 @@ export class FlightController {
 
         // Buoc 4: Xoa flight
         const deleteQuery = 'DELETE FROM Flights WHERE FlightID = ?';
-        connection.execute(deleteQuery, [flightId], (err, result: any) => {
+        connection.execute(deleteQuery, [flightId], async (err, result: any) => {
           if (err) {
             console.error('Error deleting flight:', err);
             res.status(500).json({ message: 'Error deleting flight', error: err.message });
             return;
           }
+
+          // Invalidate cache
+          await cacheService.delPattern('flights:*');
+          await cacheService.del(`flight:${flightId}`);
 
           res.status(200).json({ message: 'Flight deleted successfully' });
         });
@@ -244,11 +271,19 @@ export class FlightController {
   // 1. Validate input
   // 2. Tim flights theo route
   // 3. Tra ve ket qua (co the rong)
-  searchFlights(req: Request, res: Response): void {
+  async searchFlights(req: Request, res: Response): Promise<void> {
     const { departure, arrival, flightID } = req.body;
 
     // Neu co flightID, tim theo flightID cu the
     if (flightID) {
+      const cacheKey = `flight:${flightID}`;
+      const cachedData = await cacheService.get(cacheKey);
+      
+      if (cachedData) {
+        res.status(200).json(JSON.parse(cachedData));
+        return;
+      }
+
       const queryById = `
         SELECT 
           f.FlightID, f.Departure, f.Arrival, f.DepartureTime, f.ArrivalTime, 
@@ -259,7 +294,7 @@ export class FlightController {
         WHERE f.FlightID = ?
       `;
       
-      connection.query(queryById, [flightID], (err, results) => {
+      connection.query(queryById, [flightID], async (err, results) => {
         if (err) {
           console.error('Error searching flight by ID:', err);
           res.status(500).json({ message: 'Error searching flight', error: err.message });
@@ -271,6 +306,9 @@ export class FlightController {
           return;
         }
 
+        // Cache individual flight for 5 minutes
+        await cacheService.set(cacheKey, JSON.stringify(results), 300);
+
         res.status(200).json(results);
       });
       return;
@@ -279,6 +317,14 @@ export class FlightController {
     // Buoc 1: Validate input cho search theo route
     if (!departure || !arrival) {
       res.status(400).json({ message: 'Missing search parameters: departure and arrival are required' });
+      return;
+    }
+
+    const cacheKey = `flights:search:${departure}:${arrival}`;
+    const cachedData = await cacheService.get(cacheKey);
+    
+    if (cachedData) {
+      res.status(200).json(JSON.parse(cachedData));
       return;
     }
 
@@ -293,7 +339,7 @@ export class FlightController {
       WHERE f.Departure = ? AND f.Arrival = ?
     `;
     
-    connection.execute(query, [departure, arrival], (err, results) => {
+    connection.execute(query, [departure, arrival], async (err, results) => {
       if (err) {
         console.error('Error searching flights:', err);
         res.status(500).json({ message: 'Error searching flights', error: err.message });
@@ -305,6 +351,9 @@ export class FlightController {
         res.status(404).json({ message: 'No flights found for the given route' });
         return;
       }
+
+      // Cache search results for 5 minutes
+      await cacheService.set(cacheKey, JSON.stringify(results), 300);
 
       res.status(200).json(results);
     });
@@ -362,6 +411,15 @@ export class FlightController {
 
         const currentFlight = flightResults[0];
 
+        // Format dates to VN time if provided
+        const formattedDepartureTime = departureTime 
+          ? moment(departureTime).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss')
+          : undefined;
+          
+        const formattedArrivalTime = arrivalTime
+          ? moment(arrivalTime).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss')
+          : undefined;
+
         // Buoc 4: Neu co model, lay AircraftTypeID tu model name
         if (model && !aircraftTypeId) {
           const getAircraftQuery = 'SELECT AircraftID FROM Aircrafts WHERE Model = ?';
@@ -381,8 +439,8 @@ export class FlightController {
               aircraftTypeId: aircraftTypeIdFromModel,
               departure,
               arrival,
-              departureTime,
-              arrivalTime,
+              departureTime: formattedDepartureTime,
+              arrivalTime: formattedArrivalTime,
               price,
               seatsAvailable,
               status
@@ -394,8 +452,8 @@ export class FlightController {
             aircraftTypeId: aircraftTypeId || currentFlight.AircraftTypeID,
             departure,
             arrival,
-            departureTime,
-            arrivalTime,
+            departureTime: formattedDepartureTime,
+            arrivalTime: formattedArrivalTime,
             price,
             seatsAvailable,
             status
@@ -454,14 +512,53 @@ export class FlightController {
         updates.status ?? currentFlight.Status,
         flightID
       ],
-      (err) => {
+      async (err) => {
         if (err) {
           console.error('Error updating flight:', err);
           res.status(500).json({ message: 'Error updating flight', error: err.message });
           return;
         }
 
-        res.status(200).json({ message: 'Flight information updated successfully' });
+        // Invalidate cache
+        await cacheService.delPattern('flights:*');
+        await cacheService.del(`flight:${flightID}`);
+
+        // Logic gui email thong bao
+        try {
+          // Lay email tat ca users via User Service
+          const emailsResponse = await axios.get(`${this.userServiceUrl}/api/users/emails/all`);
+          const emails = emailsResponse.data.emails;
+
+          const departure = updates.departure ?? currentFlight.Departure;
+          const arrival = updates.arrival ?? currentFlight.Arrival;
+          const departureTime = updates.departureTime ?? currentFlight.DepartureTime;
+          const arrivalTime = updates.arrivalTime ?? currentFlight.ArrivalTime;
+
+          // Gui email song song cho tat ca users
+          // Khong await de tranh block response
+          Promise.all(
+            emails.map((email: string) =>
+              sendEmail(
+                email,
+                `Flight Update Notification`,
+                `Hello,\n\nThe flight details have been updated:\n\nFrom: ${departure}\nTo: ${arrival}\nDeparture Time: ${departureTime}\nArrival Time: ${arrivalTime}\n\nBest regards,\nQAirline Team`
+              ).catch((error) => {
+                console.error(`Failed to send email to ${email}:`, error);
+              })
+            )
+          );
+
+          const timestamp = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+          res.status(200).json({ 
+            message: 'Flight information updated successfully and notifications sent',
+            flightID,
+            timestamp
+          });
+        } catch (emailError: any) {
+          console.error('Error getting emails or sending notifications:', emailError.message);
+          // Van tra ve success vi flight da duoc update
+          res.status(200).json({ message: 'Flight updated but failed to send notifications' });
+        }
       }
     );
   }
@@ -565,13 +662,17 @@ export class FlightController {
                 });
               }
 
-              connection.commit((err) => {
+              connection.commit(async (err) => {
                 if (err) {
                   return connection.rollback(() => {
                     console.error('Commit error:', err);
                     res.status(500).json({ message: 'Commit error', error: err.message });
                   });
                 }
+
+                // Invalidate cache
+                await cacheService.delPattern('flights:*');
+                await cacheService.del(`flight:${flightId}`);
 
                 res.json({ message: 'Seat reserved successfully' });
               });
@@ -594,7 +695,7 @@ export class FlightController {
     connection.execute(
       'UPDATE Flights SET SeatsAvailable = SeatsAvailable + 1 WHERE FlightID = ?',
       [flightId],
-      (err, result: any) => {
+      async (err, result: any) => {
         if (err) {
           console.error('Error releasing seat:', err);
           res.status(500).json({ message: 'Error releasing seat', error: err.message });
@@ -605,6 +706,10 @@ export class FlightController {
           res.status(404).json({ message: 'Flight not found' });
           return;
         }
+
+        // Invalidate cache
+        await cacheService.delPattern('flights:*');
+        await cacheService.del(`flight:${flightId}`);
 
         res.json({ message: 'Seat released successfully' });
       }

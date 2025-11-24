@@ -3,16 +3,26 @@ import { Request, Response } from 'express';
 import connection from '../database/database';
 import { CreateOfferRequest, DeleteOfferRequest } from '../types/offer';
 import { sendEmail } from '../services/EmailService';
+import { cacheService } from '../services/CacheService';
 import axios from 'axios';
 
 export class OfferController {
   private userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:5001';
 
   // Lay tat ca offers (public - khong can dang nhap)
-  getAllOffers(req: Request, res: Response): void {
+  async getAllOffers(req: Request, res: Response): Promise<void> {
+    const cacheKey = 'offers:all';
+    
+    // Try to get from cache first
+    const cachedData = await cacheService.get(cacheKey);
+    if (cachedData) {
+      res.status(200).json(JSON.parse(cachedData));
+      return;
+    }
+
     const query = 'SELECT PostID, Title, Content, PostDate FROM Offers';
     
-    connection.query(query, (err, results) => {
+    connection.query(query, async (err, results) => {
       if (err) {
         console.error('Error executing query:', err.stack);
         res.status(500).json({ message: 'Internal Server Error', error: err.message });
@@ -24,6 +34,9 @@ export class OfferController {
         res.status(404).json({ message: 'No offers found' });
         return;
       }
+
+      // Save to cache for 1 hour (offers change infrequently)
+      await cacheService.set(cacheKey, JSON.stringify(results), 3600);
 
       // Trả về tất cả các offers
       res.status(200).json(results);
@@ -56,6 +69,9 @@ export class OfferController {
           res.status(500).json({ message: 'Failed to create Offer' });
           return;
         }
+
+        // Invalidate cache
+        await cacheService.del('offers:all');
 
         // Lay email tat ca users via User Service
         try {
@@ -128,7 +144,7 @@ export class OfferController {
 
         // Xoa offer
         const deleteQuery = 'DELETE FROM Offers WHERE PostID = ?';
-        connection.query(deleteQuery, [postID], (err, results: any) => {
+        connection.query(deleteQuery, [postID], async (err, results: any) => {
           if (err) {
             console.error('Error executing query:', err.stack);
             res.status(500).json({ message: 'Internal Server Error', error: err.message });
@@ -139,6 +155,9 @@ export class OfferController {
             res.status(404).json({ message: 'Offer not found or user does not have permission' });
             return;
           }
+
+          // Invalidate cache
+          await cacheService.del('offers:all');
 
           res.status(200).json({ message: 'Offer deleted successfully' });
         });

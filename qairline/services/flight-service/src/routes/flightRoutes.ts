@@ -8,6 +8,7 @@ const flightController = new FlightController();
 router.get('/GetAllFlights', flightController.getAllFlights.bind(flightController));
 router.post('/SearchFlight', flightController.searchFlights.bind(flightController));
 router.post('/Add', flightController.createFlight.bind(flightController));
+router.post('/Edit', flightController.editFlight.bind(flightController));
 router.post('/Delete', flightController.deleteFlight.bind(flightController));
 router.put('/status', flightController.updateFlightStatus.bind(flightController));
 

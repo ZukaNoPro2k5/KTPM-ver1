@@ -14,10 +14,25 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./qairline/SETUP-SEPARATE-DATABASES.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
+
+  # Redis Cache
+  redis:
+    image: redis:alpine
+    container_name: qairline-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # User Service
   user-service:
@@ -31,7 +46,7 @@ services:
       - DB_PORT=3306
       - DB_USER=dev
       - DB_PASSWORD=MyRootPass123
-      - DB_NAME=QAirline
+      - DB_NAME=user_service_db
       - JWT_SECRET=your-secret-key-here
     depends_on:
       db:
@@ -49,9 +64,13 @@ services:
       - DB_PORT=3306
       - DB_USER=dev
       - DB_PASSWORD=MyRootPass123
-      - DB_NAME=QAirline
+      - DB_NAME=flight_service_db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
 
   # Booking Service
@@ -66,7 +85,7 @@ services:
       - DB_PORT=3306
       - DB_USER=dev
       - DB_PASSWORD=MyRootPass123
-      - DB_NAME=QAirline
+      - DB_NAME=booking_service_db
     depends_on:
       db:
         condition: service_healthy
@@ -83,9 +102,13 @@ services:
       - DB_PORT=3306
       - DB_USER=dev
       - DB_PASSWORD=MyRootPass123
-      - DB_NAME=QAirline
+      - DB_NAME=offer_service_db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
 
   # API Gateway
@@ -133,4 +156,6 @@ services:
 
 volumes:
   db_data:
+    driver: local
+  redis_data:
     driver: local

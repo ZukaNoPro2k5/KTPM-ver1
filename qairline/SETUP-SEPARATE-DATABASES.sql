@@ -36,7 +36,7 @@ VALUES
     ('Alice Johnson', 'alice_johnson', 'alice@example.com', '$2a$10$abcdefghijklmnopqrstuv', 'Admin'),
     ('Bob Brown', 'bob_brown', 'bob@example.com', '$2a$10$abcdefghijklmnopqrstuv', 'Customer'),
     ('Charlie White', 'charlie_white', 'charlie@example.com', '$2a$10$abcdefghijklmnopqrstuv', 'Customer'),
-    ('Admin User', 'admin', 'admin@qairline.com', '$2a$10$abcdefghijklmnopqrstuv', 'Admin');
+    ('Admin User', 'a dmin', 'admin@qairline.com', '$2a$10$abcdefghijklmnopqrstuv', 'Admin');
 
 SELECT '✅ User Service Database created successfully!' AS Status;
 
@@ -245,6 +245,6 @@ SELECT 'offer_service_db' AS db_name, 'Offers' AS table_name, COUNT(*) AS Record
 -- 5. Cần implement validation và error handling cẩn thận
 -- ============================================
 SHOW DATABASES;
-use user_service_db
+use user_service_db;
 INSERT INTO Users (Name, Username, Email, Password, Role)
 VALUES ('Admin','admin123','admin123@qairline.com','$2b$10$wYT7BdG717HqkDxyF1kg1.4Fhc.AgwMdkTQ00iPo4zZmzWiZC0XNu','Admin');

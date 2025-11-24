@@ -2,102 +2,108 @@
 
 ## 🎯 Tổng quan
 
-Dự án QAirline được xây dựng theo kiến trúc microservices, bao gồm:
+Dự án QAirline được chuyển đổi từ Monolith sang Microservices, bao gồm:
 
-- **API Gateway**: Điểm truy cập duy nhất, định tuyến requests đến các services
-- **Booking Service**: Quản lý đặt vé
-- **Flight Service**: Quản lý chuyến bay
-- **Offer Service**: Quản lý khuyến mãi
-- **User Service**: Quản lý người dùng
+- **API Gateway**: Điểm truy cập duy nhất (Port 3001)
+- **Frontend**: Next.js Application (Port 3000)
+- **User Service**: Quản lý người dùng & Auth (Port 5001)
+- **Flight Service**: Quản lý chuyến bay & Tìm kiếm (Port 5002)
+- **Booking Service**: Quản lý đặt vé (Port 5003)
+- **Offer Service**: Quản lý khuyến mãi (Port 5004)
 
 ## 📁 Cấu trúc dự án
 
 ```
 qairline/
-├── api-gateway/              # API Gateway - cổng vào chính
-│   ├── src/
-│   │   └── index.ts         # Entry point
-│   ├── .env                 # Environment variables
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── services/                 # Các microservices
-│   ├── booking-service/     # Service quản lý đặt vé
-│   │   ├── src/
-│   │   │   ├── controllers/ # Xử lý logic nghiệp vụ
-│   │   │   ├── database/    # Kết nối DB
-│   │   │   ├── routes/      # Định nghĩa routes
-│   │   │   ├── types/       # TypeScript types
-│   │   │   └── index.ts     # Entry point
-│   │   ├── tests/           # Unit tests
-│   │   ├── .env            # Environment variables
-│   │   ├── jest.config.js
-│   │   └── package.json
-│   │
-│   ├── flight-service/      # Service quản lý chuyến bay
-│   │   ├── src/
-│   │   ├── tests/
-│   │   ├── .env
-│   │   └── package.json
-│   │
-│   ├── offer-service/       # Service quản lý khuyến mãi
-│   │   ├── src/
-│   │   ├── tests/
-│   │   ├── .env
-│   │   └── package.json
-│   │
-│   └── user-service/        # Service quản lý người dùng
-│       ├── src/
-│       ├── tests/
-│       ├── .env
-│       └── package.json
-│
-├── frontend/                # Next.js frontend (port 3000)
-├── SETUP-DATABASE.sql       # Script tạo database (chạy 1 lần duy nhất)
-├── start-app.bat            # Shortcut để chạy tất cả services
-└── package.json             # Root workspace config
+├── api-gateway/              # API Gateway
+├── frontend/                 # Next.js Frontend
+├── services/                 # Microservices
+│   ├── booking-service/      # Port 5003
+│   ├── flight-service/       # Port 5002
+│   ├── offer-service/        # Port 5004
+│   └── user-service/         # Port 5001
+├── docker-compose.yml        # Config cho Redis & MySQL
+├── SETUP-SEPARATE-DATABASES.sql # Script tạo 4 DB riêng biệt
+└── package.json              # Monorepo scripts
 ```
 
-## 🛠️ Công nghệ sử dụng
+## 🚀 Hướng dẫn Cài đặt & Chạy (Dành cho Dev)
 
-- **Runtime**: Node.js
-- **Language**: TypeScript
-- **Framework**: Express.js
-- **Database**: MySQL
-- **Testing**: Jest + Supertest
-- **Dev Tools**: ts-node-dev (hot reload)
+### 1. Yêu cầu
+- **Node.js** (v18+)
+- **Docker Desktop** (Bắt buộc để chạy Redis)
+- **Git**
 
-## 📦 Cài đặt nhanh (không dùng Docker)
-
-Từ thư mục `qairline/` (root monorepo):
-
+### 2. Cài đặt Dependencies
+Tại thư mục `qairline/`:
 ```powershell
 npm install
-
-# Chạy tất cả services + API Gateway (hot reload)
-npm run dev
-
-# Hoặc chỉ chạy API Gateway
-npm run dev:gateway
 ```
 
-Ghi chú:
-- API Gateway mặc định chạy ở `http://localhost:3001`
-- Các service chạy ở cổng nội bộ 4001-4004 (gateway proxy nên frontend vẫn gọi qua gateway như cũ)
+### 3. Khởi tạo Hạ tầng (Infrastructure)
+Dự án cần **Redis** (để caching) và **MySQL**. Bạn có 2 lựa chọn cho Database:
 
----
+#### ✅ Cách 1: Dùng Full Docker (Khuyên dùng - Sạch sẽ)
+Chạy cả Redis và MySQL bằng Docker.
+1. Mở terminal tại thư mục gốc (nơi có `docker-compose.yml`):
+   ```powershell
+   docker-compose up -d
+   ```
+2. Cấu hình file `.env` trong các service (`services/*/src/.env`):
+   - `DB_HOST=localhost`
+   - `DB_PORT=3307` (Port của Docker MySQL)
+   - `DB_PASSWORD=MyRootPass123`
 
-## 📦 Cài đặt thủ công
+#### ✅ Cách 2: Dùng Hybrid (Local MySQL + Docker Redis)
+Dùng MySQL có sẵn trên máy bạn, chỉ chạy Redis bằng Docker.
+1. Mở terminal, chỉ chạy Redis:
+   ```powershell
+   docker-compose up -d redis
+   ```
+2. Cấu hình file `.env` trong các service:
+   - `DB_HOST=localhost`
+   - `DB_PORT=3306` (Port MySQL máy bạn)
+   - `DB_USER` / `DB_PASSWORD`: Theo cấu hình máy bạn.
 
-### 1. Cài đặt dependencies cho tất cả services
+### 4. Khởi tạo Database
+Dù dùng cách nào, bạn cần chạy script SQL để tạo cấu trúc bảng.
+- Mở file `qairline/SETUP-SEPARATE-DATABASES.sql`.
+- Chạy script này trong tool quản lý DB của bạn (DataGrip, Workbench, DBeaver).
+- **Lưu ý:** Script này sẽ tạo 4 database riêng biệt: `user_service_db`, `flight_service_db`, `booking_service_db`, `offer_service_db`.
 
-```bash
-# Cài đặt API Gateway
-cd api-gateway
-npm install
+### 5. Chạy Ứng dụng
+Tại thư mục `qairline/`:
+```powershell
+npm run dev
+```
+Lệnh này sẽ chạy đồng thời:
+- Frontend (localhost:3000)
+- API Gateway (localhost:3001)
+- 4 Microservices
 
-# Cài đặt từng service
-cd .../services/booking-service
+## 🔌 Danh sách Port
+
+| Service | Port | URL |
+|---------|------|-----|
+| Frontend | 3000 | http://localhost:3000 |
+| API Gateway | 3001 | http://localhost:3001 |
+| User Service | 5001 | http://localhost:5001 |
+| Flight Service | 5002 | http://localhost:5002 |
+| Booking Service | 5003 | http://localhost:5003 |
+| Offer Service | 5004 | http://localhost:5004 |
+| Redis | 6379 | localhost:6379 |
+| MySQL (Docker) | 3307 | localhost:3307 |
+| MySQL (Local) | 3306 | localhost:3306 |
+
+## ⚠️ Troubleshooting
+
+**Lỗi: `connect ECONNREFUSED 127.0.0.1:6379`**
+- Nguyên nhân: Redis chưa chạy.
+- Khắc phục: Chạy `docker-compose up -d redis`.
+
+**Lỗi: `connect ECONNREFUSED 127.0.0.1:3306`**
+- Nguyên nhân: MySQL chưa chạy hoặc sai port.
+- Khắc phục: Kiểm tra MySQL service hoặc đổi port trong `.env` sang 3307 nếu dùng Docker.
 npm install
 
 cd .../flight-service

@@ -54,11 +54,9 @@ export class UserController {
 
   // Dang ky: tao user moi voi password da hash, tra ve JWT token
   signUp(req: Request, res: Response) {
-    console.log('📝 SignUp request received:', { body: req.body });
     const { name, username, email, password, role } = req.body;
 
     if (!name || !username || !email || !password) {
-      console.log('❌ Missing required fields');
       return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -70,18 +68,15 @@ export class UserController {
 
       const rows = results as any[];
       if (rows.length > 0) {
-        console.log('❌ User already exists');
         return res.status(400).json({ message: 'Username or Email already exists' });
       }
 
-      console.log('🔐 Hashing password...');
       bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
           console.error('Error hashing password:', err);
           return res.status(500).json({ message: 'Error hashing password' });
         }
 
-        console.log('💾 Inserting user into database...');
         connection.execute(
           'INSERT INTO Users (Name, Username, Email, Password, Role) VALUES (?, ?, ?, ?, ?)',
           [name, username, email, hashedPassword, role || 'Customer'],
