@@ -1,0 +1,19 @@
+{
+    "name": "qairline-quality-tests",
+    "version": "1.0.0",
+    "description": "Quality attribute measurement scripts for QAirLine microservices",
+    "scripts": {
+        "performance": "node performance-test.js",
+        "capacity": "node capacity-test.js",
+        "availability": "node availability-test.js",
+        "modifiability": "node modifiability-analysis.js",
+        "deployability": "node deployability-analysis.js",
+        "scalability": "node scalability-test.js",
+        "interoperability": "node interoperability-analysis.js",
+        "security": "node security-analysis.js",
+        "all": "node run-all-tests.js"
+    },
+    "dependencies": {
+        "axios": "^1.6.0"
+    }
+}
