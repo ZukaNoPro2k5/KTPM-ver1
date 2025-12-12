@@ -1,0 +1,1182 @@
+{
+  "timestamp": "2025-12-07T00:46:49.683Z",
+  "summary": {
+    "totalModules": 39,
+    "avgCoupling": 1.64,
+    "avgCohesion": 0.66,
+    "highRiskCount": 2
+  },
+  "coupling": [
+    {
+      "module": "FlightRoutes.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/routes/FlightRoutes.ts",
+      "efferentCoupling": 4,
+      "afferentCoupling": 1,
+      "totalCoupling": 5,
+      "instability": 0.8,
+      "externalDeps": 1
+    },
+    {
+      "module": "database.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/database/database.ts",
+      "efferentCoupling": 0,
+      "afferentCoupling": 4,
+      "totalCoupling": 4,
+      "instability": 0,
+      "externalDeps": 2
+    },
+    {
+      "module": "aircraftObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/aircraftObject.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 4,
+      "totalCoupling": 4,
+      "instability": 0,
+      "externalDeps": 0
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/page.tsx",
+      "efferentCoupling": 4,
+      "afferentCoupling": 0,
+      "totalCoupling": 4,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "FlightForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightForm.tsx",
+      "efferentCoupling": 3,
+      "afferentCoupling": 1,
+      "totalCoupling": 4,
+      "instability": 0.75,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/page.tsx",
+      "efferentCoupling": 4,
+      "afferentCoupling": 0,
+      "totalCoupling": 4,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "FlightController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/FlightController.ts",
+      "efferentCoupling": 2,
+      "afferentCoupling": 1,
+      "totalCoupling": 3,
+      "instability": 0.67,
+      "externalDeps": 5
+    },
+    {
+      "module": "AircraftForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftForm.tsx",
+      "efferentCoupling": 2,
+      "afferentCoupling": 1,
+      "totalCoupling": 3,
+      "instability": 0.67,
+      "externalDeps": 1
+    },
+    {
+      "module": "AircraftTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftTable.tsx",
+      "efferentCoupling": 2,
+      "afferentCoupling": 1,
+      "totalCoupling": 3,
+      "instability": 0.67,
+      "externalDeps": 1
+    },
+    {
+      "module": "FlightTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightTable.tsx",
+      "efferentCoupling": 2,
+      "afferentCoupling": 1,
+      "totalCoupling": 3,
+      "instability": 0.67,
+      "externalDeps": 2
+    },
+    {
+      "module": "flightObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/flightObject.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 3,
+      "totalCoupling": 3,
+      "instability": 0,
+      "externalDeps": 0
+    },
+    {
+      "module": "UserController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/UserController.ts",
+      "efferentCoupling": 1,
+      "afferentCoupling": 1,
+      "totalCoupling": 2,
+      "instability": 0.5,
+      "externalDeps": 2
+    },
+    {
+      "module": "Sign_in_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_in_Controller.ts",
+      "efferentCoupling": 1,
+      "afferentCoupling": 1,
+      "totalCoupling": 2,
+      "instability": 0.5,
+      "externalDeps": 3
+    },
+    {
+      "module": "Sign_up_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_up_Controller.ts",
+      "efferentCoupling": 1,
+      "afferentCoupling": 1,
+      "totalCoupling": 2,
+      "instability": 0.5,
+      "externalDeps": 4
+    },
+    {
+      "module": "index.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/index.ts",
+      "efferentCoupling": 2,
+      "afferentCoupling": 0,
+      "totalCoupling": 2,
+      "instability": 1,
+      "externalDeps": 3
+    },
+    {
+      "module": "EmailService.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/EmailService.ts",
+      "efferentCoupling": 0,
+      "afferentCoupling": 1,
+      "totalCoupling": 1,
+      "instability": 0,
+      "externalDeps": 1
+    },
+    {
+      "module": "timing-middleware.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/timing-middleware.ts",
+      "efferentCoupling": 0,
+      "afferentCoupling": 1,
+      "totalCoupling": 1,
+      "instability": 0,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/customer/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/offer/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/about/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 1
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/payment/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 3
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/search/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 4
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/home/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 5
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/manage-bookings/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 4
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/page.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "AdminHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AdminHeader.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "CustomerHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/CustomerHeader.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 3
+    },
+    {
+      "module": "Dropdown.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Dropdown.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 2
+    },
+    {
+      "module": "SearchBar.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/SearchBar.tsx",
+      "efferentCoupling": 1,
+      "afferentCoupling": 0,
+      "totalCoupling": 1,
+      "instability": 1,
+      "externalDeps": 3
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/layout.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 4
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/layout.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 4
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/layout.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 5
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/[id]/page.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 5
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/page.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 3
+    },
+    {
+      "module": "AuthCheck.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthCheck.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 3
+    },
+    {
+      "module": "AuthenticationPopUp.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthenticationPopUp.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 3
+    },
+    {
+      "module": "Footer.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Footer.tsx",
+      "efferentCoupling": 0,
+      "afferentCoupling": 0,
+      "totalCoupling": 0,
+      "instability": 0,
+      "externalDeps": 1
+    }
+  ],
+  "cohesion": [
+    {
+      "module": "FlightController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/FlightController.ts",
+      "lines": 1109,
+      "functions": 117,
+      "exports": 16,
+      "linesPerFunction": 9.5,
+      "cohesionScore": 0,
+      "cohesionType": "Coincidental"
+    },
+    {
+      "module": "index.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/index.ts",
+      "lines": 27,
+      "functions": 0,
+      "exports": 0,
+      "linesPerFunction": 27,
+      "cohesionScore": 0,
+      "cohesionType": "Coincidental"
+    },
+    {
+      "module": "FlightRoutes.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/routes/FlightRoutes.ts",
+      "lines": 52,
+      "functions": 0,
+      "exports": 0,
+      "linesPerFunction": 52,
+      "cohesionScore": 0,
+      "cohesionType": "Coincidental"
+    },
+    {
+      "module": "aircraftObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/aircraftObject.tsx",
+      "lines": 8,
+      "functions": 0,
+      "exports": 0,
+      "linesPerFunction": 8,
+      "cohesionScore": 0,
+      "cohesionType": "Coincidental"
+    },
+    {
+      "module": "flightObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/flightObject.tsx",
+      "lines": 11,
+      "functions": 0,
+      "exports": 0,
+      "linesPerFunction": 11,
+      "cohesionScore": 0,
+      "cohesionType": "Coincidental"
+    },
+    {
+      "module": "database.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/database/database.ts",
+      "lines": 22,
+      "functions": 1,
+      "exports": 0,
+      "linesPerFunction": 22,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/customer/page.tsx",
+      "lines": 184,
+      "functions": 10,
+      "exports": 0,
+      "linesPerFunction": 18.4,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/offer/page.tsx",
+      "lines": 136,
+      "functions": 12,
+      "exports": 0,
+      "linesPerFunction": 11.3,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/page.tsx",
+      "lines": 52,
+      "functions": 7,
+      "exports": 0,
+      "linesPerFunction": 7.4,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/page.tsx",
+      "lines": 110,
+      "functions": 8,
+      "exports": 0,
+      "linesPerFunction": 13.8,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/about/page.tsx",
+      "lines": 42,
+      "functions": 1,
+      "exports": 0,
+      "linesPerFunction": 42,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/payment/page.tsx",
+      "lines": 105,
+      "functions": 8,
+      "exports": 0,
+      "linesPerFunction": 13.1,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/search/page.tsx",
+      "lines": 162,
+      "functions": 9,
+      "exports": 0,
+      "linesPerFunction": 18,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/manage-bookings/page.tsx",
+      "lines": 185,
+      "functions": 13,
+      "exports": 0,
+      "linesPerFunction": 14.2,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/page.tsx",
+      "lines": 97,
+      "functions": 8,
+      "exports": 0,
+      "linesPerFunction": 12.1,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "AdminHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AdminHeader.tsx",
+      "lines": 41,
+      "functions": 2,
+      "exports": 0,
+      "linesPerFunction": 20.5,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "AuthCheck.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthCheck.tsx",
+      "lines": 41,
+      "functions": 4,
+      "exports": 0,
+      "linesPerFunction": 10.3,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "AuthenticationPopUp.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthenticationPopUp.tsx",
+      "lines": 195,
+      "functions": 15,
+      "exports": 0,
+      "linesPerFunction": 13,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "Dropdown.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Dropdown.tsx",
+      "lines": 64,
+      "functions": 4,
+      "exports": 0,
+      "linesPerFunction": 16,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "SearchBar.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/SearchBar.tsx",
+      "lines": 109,
+      "functions": 6,
+      "exports": 0,
+      "linesPerFunction": 18.2,
+      "cohesionScore": 0.5,
+      "cohesionType": "Communicational"
+    },
+    {
+      "module": "timing-middleware.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/timing-middleware.ts",
+      "lines": 58,
+      "functions": 4,
+      "exports": 3,
+      "linesPerFunction": 14.5,
+      "cohesionScore": 0.8,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/[id]/page.tsx",
+      "lines": 107,
+      "functions": 6,
+      "exports": 3,
+      "linesPerFunction": 17.8,
+      "cohesionScore": 0.8,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "UserController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/UserController.ts",
+      "lines": 55,
+      "functions": 6,
+      "exports": 2,
+      "linesPerFunction": 9.2,
+      "cohesionScore": 0.9,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/layout.tsx",
+      "lines": 24,
+      "functions": 2,
+      "exports": 2,
+      "linesPerFunction": 12,
+      "cohesionScore": 0.9,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/layout.tsx",
+      "lines": 27,
+      "functions": 2,
+      "exports": 2,
+      "linesPerFunction": 13.5,
+      "cohesionScore": 0.9,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "EmailService.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/EmailService.ts",
+      "lines": 34,
+      "functions": 3,
+      "exports": 1,
+      "linesPerFunction": 11.3,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "Sign_in_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_in_Controller.ts",
+      "lines": 54,
+      "functions": 5,
+      "exports": 1,
+      "linesPerFunction": 10.8,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "Sign_up_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_up_Controller.ts",
+      "lines": 61,
+      "functions": 6,
+      "exports": 1,
+      "linesPerFunction": 10.2,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "AircraftForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftForm.tsx",
+      "lines": 102,
+      "functions": 6,
+      "exports": 1,
+      "linesPerFunction": 17,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "AircraftTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftTable.tsx",
+      "lines": 44,
+      "functions": 4,
+      "exports": 1,
+      "linesPerFunction": 11,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/page.tsx",
+      "lines": 192,
+      "functions": 21,
+      "exports": 1,
+      "linesPerFunction": 9.1,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "FlightForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightForm.tsx",
+      "lines": 246,
+      "functions": 14,
+      "exports": 1,
+      "linesPerFunction": 17.6,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "FlightTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightTable.tsx",
+      "lines": 64,
+      "functions": 6,
+      "exports": 1,
+      "linesPerFunction": 10.7,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/page.tsx",
+      "lines": 204,
+      "functions": 21,
+      "exports": 1,
+      "linesPerFunction": 9.7,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/layout.tsx",
+      "lines": 17,
+      "functions": 2,
+      "exports": 1,
+      "linesPerFunction": 8.5,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/home/page.tsx",
+      "lines": 155,
+      "functions": 10,
+      "exports": 1,
+      "linesPerFunction": 15.5,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/page.tsx",
+      "lines": 16,
+      "functions": 2,
+      "exports": 1,
+      "linesPerFunction": 8,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "CustomerHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/CustomerHeader.tsx",
+      "lines": 95,
+      "functions": 11,
+      "exports": 1,
+      "linesPerFunction": 8.6,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    },
+    {
+      "module": "Footer.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Footer.tsx",
+      "lines": 12,
+      "functions": 2,
+      "exports": 1,
+      "linesPerFunction": 6,
+      "cohesionScore": 1,
+      "cohesionType": "Functional"
+    }
+  ],
+  "scopeOfInfluence": [
+    {
+      "module": "database.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/database/database.ts",
+      "directInfluence": 4,
+      "transitiveInfluence": 6,
+      "totalInfluence": 6,
+      "impactScore": 14,
+      "riskLevel": "HIGH",
+      "dependents": [
+        "FlightController.ts",
+        "UserController.ts",
+        "Sign_in_Controller.ts",
+        "Sign_up_Controller.ts"
+      ]
+    },
+    {
+      "module": "aircraftObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/aircraftObject.tsx",
+      "directInfluence": 4,
+      "transitiveInfluence": 5,
+      "totalInfluence": 5,
+      "impactScore": 13,
+      "riskLevel": "HIGH",
+      "dependents": [
+        "AircraftForm.tsx",
+        "AircraftTable.tsx",
+        "page.tsx",
+        "FlightForm.tsx"
+      ]
+    },
+    {
+      "module": "flightObject.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/flightObject.tsx",
+      "directInfluence": 3,
+      "transitiveInfluence": 3,
+      "totalInfluence": 3,
+      "impactScore": 9,
+      "riskLevel": "MEDIUM",
+      "dependents": [
+        "FlightForm.tsx",
+        "FlightTable.tsx",
+        "page.tsx"
+      ]
+    },
+    {
+      "module": "EmailService.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/EmailService.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 3,
+      "totalInfluence": 3,
+      "impactScore": 5,
+      "riskLevel": "MEDIUM",
+      "dependents": [
+        "FlightController.ts"
+      ]
+    },
+    {
+      "module": "FlightController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/FlightController.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 2,
+      "totalInfluence": 2,
+      "impactScore": 4,
+      "riskLevel": "LOW",
+      "dependents": [
+        "FlightRoutes.ts"
+      ]
+    },
+    {
+      "module": "UserController.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/UserController.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 2,
+      "totalInfluence": 2,
+      "impactScore": 4,
+      "riskLevel": "LOW",
+      "dependents": [
+        "FlightRoutes.ts"
+      ]
+    },
+    {
+      "module": "Sign_in_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_in_Controller.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 2,
+      "totalInfluence": 2,
+      "impactScore": 4,
+      "riskLevel": "LOW",
+      "dependents": [
+        "FlightRoutes.ts"
+      ]
+    },
+    {
+      "module": "Sign_up_Controller.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/controllers/User_Logging/Sign_up_Controller.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 2,
+      "totalInfluence": 2,
+      "impactScore": 4,
+      "riskLevel": "LOW",
+      "dependents": [
+        "FlightRoutes.ts"
+      ]
+    },
+    {
+      "module": "FlightRoutes.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/routes/FlightRoutes.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "index.ts"
+      ]
+    },
+    {
+      "module": "timing-middleware.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/timing-middleware.ts",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "index.ts"
+      ]
+    },
+    {
+      "module": "AircraftForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftForm.tsx",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "page.tsx"
+      ]
+    },
+    {
+      "module": "AircraftTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/(component)/AircraftTable.tsx",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "page.tsx"
+      ]
+    },
+    {
+      "module": "FlightForm.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightForm.tsx",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "page.tsx"
+      ]
+    },
+    {
+      "module": "FlightTable.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/(components)/FlightTable.tsx",
+      "directInfluence": 1,
+      "transitiveInfluence": 1,
+      "totalInfluence": 1,
+      "impactScore": 3,
+      "riskLevel": "LOW",
+      "dependents": [
+        "page.tsx"
+      ]
+    },
+    {
+      "module": "index.ts",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/backend/src/index.ts",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/aircraft/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/customer/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/flight/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/layout.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/offer/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/home/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/admin/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(adminPage)/layout.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/about/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/payment/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/bookings/search/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/home/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "layout.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/layout.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/manage-bookings/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/offers/[id]/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "page.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/(pages)/(customerPage)/page.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "AdminHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AdminHeader.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "AuthCheck.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthCheck.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "AuthenticationPopUp.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/AuthenticationPopUp.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "CustomerHeader.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/CustomerHeader.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "Dropdown.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Dropdown.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "Footer.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/Footer.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    },
+    {
+      "module": "SearchBar.tsx",
+      "path": "d:/Software Achitecture/BTL/QAirLine_chua_cai_tien/frontend/app/components/SearchBar.tsx",
+      "directInfluence": 0,
+      "transitiveInfluence": 0,
+      "totalInfluence": 0,
+      "impactScore": 0,
+      "riskLevel": "LOW",
+      "dependents": []
+    }
+  ]
+}

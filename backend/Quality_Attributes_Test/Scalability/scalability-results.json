@@ -1,0 +1,969 @@
+{
+  "timestamp": "2025-12-07T12:58:26.535Z",
+  "config": {
+    "BASELINE_USERS": 10,
+    "SPIKE_USERS": 100,
+    "BASELINE_DURATION": 15000,
+    "RAMP_UP_DURATION": 5000,
+    "SPIKE_DURATION": 20000,
+    "RAMP_DOWN_DURATION": 5000,
+    "RECOVERY_DURATION": 15000,
+    "SAMPLE_INTERVAL": 1000,
+    "TARGET_ENDPOINT": "/api/Flights/GetAllFlights",
+    "ACCEPTABLE_ERROR_RATE": 5,
+    "ACCEPTABLE_RESPONSE_TIME": 500
+  },
+  "phases": [
+    {
+      "name": "Baseline",
+      "duration": 15000,
+      "avgLoad": 10,
+      "avgThroughput": 2277,
+      "avgErrorRate": 96.38,
+      "avgResponseTime": 4.49
+    },
+    {
+      "name": "Ramp Up",
+      "duration": 5000,
+      "avgLoad": 46,
+      "avgThroughput": 2380,
+      "avgErrorRate": 97.34,
+      "avgResponseTime": 19.44
+    },
+    {
+      "name": "Sustained Spike",
+      "duration": 20000,
+      "avgLoad": 100,
+      "avgThroughput": 2393,
+      "avgErrorRate": 96.93,
+      "avgResponseTime": 42.71
+    },
+    {
+      "name": "Ramp Down",
+      "duration": 5000,
+      "avgLoad": 100,
+      "avgThroughput": 2340,
+      "avgErrorRate": 96.37,
+      "avgResponseTime": 43.75
+    },
+    {
+      "name": "Recovery",
+      "duration": 15000,
+      "avgLoad": 100,
+      "avgThroughput": 2409,
+      "avgErrorRate": 97.25,
+      "avgResponseTime": 42.33
+    }
+  ],
+  "analysis": {
+    "loadIncreaseFactor": 10,
+    "throughputIncreaseFactor": 1.05,
+    "responseTimeIncreaseFactor": 9.51,
+    "errorRateIncrease": 0.55,
+    "scalabilityEfficiency": 0.11,
+    "recoveryScore": 25,
+    "overallScore": 26
+  },
+  "samples": [
+    {
+      "timestamp": 1765112245245,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 1739,
+      "errors": 1636,
+      "stats": {
+        "throughput": 1739,
+        "errorRate": 94.08,
+        "avgResponseTime": 5.74,
+        "p95ResponseTime": 17.73,
+        "maxResponseTime": 23.9
+      }
+    },
+    {
+      "timestamp": 1765112246248,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2151,
+      "errors": 2151,
+      "stats": {
+        "throughput": 2151,
+        "errorRate": 100,
+        "avgResponseTime": 4.64,
+        "p95ResponseTime": 6.22,
+        "maxResponseTime": 9.34
+      }
+    },
+    {
+      "timestamp": 1765112247250,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2045,
+      "errors": 1906,
+      "stats": {
+        "throughput": 2045,
+        "errorRate": 93.2,
+        "avgResponseTime": 4.89,
+        "p95ResponseTime": 16.56,
+        "maxResponseTime": 47.12
+      }
+    },
+    {
+      "timestamp": 1765112248251,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2740,
+      "errors": 2740,
+      "stats": {
+        "throughput": 2740,
+        "errorRate": 100,
+        "avgResponseTime": 3.64,
+        "p95ResponseTime": 4.76,
+        "maxResponseTime": 13.24
+      }
+    },
+    {
+      "timestamp": 1765112249253,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2040,
+      "errors": 1910,
+      "stats": {
+        "throughput": 2040,
+        "errorRate": 93.63,
+        "avgResponseTime": 4.9,
+        "p95ResponseTime": 16.15,
+        "maxResponseTime": 46.26
+      }
+    },
+    {
+      "timestamp": 1765112250254,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2565,
+      "errors": 2565,
+      "stats": {
+        "throughput": 2565,
+        "errorRate": 100,
+        "avgResponseTime": 3.9,
+        "p95ResponseTime": 5.36,
+        "maxResponseTime": 14.55
+      }
+    },
+    {
+      "timestamp": 1765112251256,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 1874,
+      "errors": 1728,
+      "stats": {
+        "throughput": 1874,
+        "errorRate": 92.21,
+        "avgResponseTime": 5.34,
+        "p95ResponseTime": 15.36,
+        "maxResponseTime": 49.68
+      }
+    },
+    {
+      "timestamp": 1765112252258,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2620,
+      "errors": 2620,
+      "stats": {
+        "throughput": 2620,
+        "errorRate": 100,
+        "avgResponseTime": 3.82,
+        "p95ResponseTime": 5.82,
+        "maxResponseTime": 10.3
+      }
+    },
+    {
+      "timestamp": 1765112253260,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 1894,
+      "errors": 1751,
+      "stats": {
+        "throughput": 1894,
+        "errorRate": 92.45,
+        "avgResponseTime": 5.27,
+        "p95ResponseTime": 15.67,
+        "maxResponseTime": 46.25
+      }
+    },
+    {
+      "timestamp": 1765112254261,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2670,
+      "errors": 2670,
+      "stats": {
+        "throughput": 2670,
+        "errorRate": 100,
+        "avgResponseTime": 3.74,
+        "p95ResponseTime": 5.05,
+        "maxResponseTime": 7.03
+      }
+    },
+    {
+      "timestamp": 1765112255261,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2108,
+      "errors": 1970,
+      "stats": {
+        "throughput": 2108,
+        "errorRate": 93.45,
+        "avgResponseTime": 4.74,
+        "p95ResponseTime": 15.45,
+        "maxResponseTime": 45.53
+      }
+    },
+    {
+      "timestamp": 1765112256262,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2734,
+      "errors": 2734,
+      "stats": {
+        "throughput": 2734,
+        "errorRate": 100,
+        "avgResponseTime": 3.65,
+        "p95ResponseTime": 4.75,
+        "maxResponseTime": 6.45
+      }
+    },
+    {
+      "timestamp": 1765112257264,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2122,
+      "errors": 1982,
+      "stats": {
+        "throughput": 2122,
+        "errorRate": 93.4,
+        "avgResponseTime": 4.7,
+        "p95ResponseTime": 15.32,
+        "maxResponseTime": 43.39
+      }
+    },
+    {
+      "timestamp": 1765112258264,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2728,
+      "errors": 2728,
+      "stats": {
+        "throughput": 2728,
+        "errorRate": 100,
+        "avgResponseTime": 3.66,
+        "p95ResponseTime": 5.35,
+        "maxResponseTime": 9.3
+      }
+    },
+    {
+      "timestamp": 1765112259265,
+      "phase": "Baseline",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2127,
+      "errors": 1985,
+      "stats": {
+        "throughput": 2127,
+        "errorRate": 93.32,
+        "avgResponseTime": 4.7,
+        "p95ResponseTime": 15.35,
+        "maxResponseTime": 45.26
+      }
+    },
+    {
+      "timestamp": 1765112260266,
+      "phase": "Ramp Up",
+      "targetLoad": 10,
+      "actualLoad": 10,
+      "requests": 2627,
+      "errors": 2627,
+      "stats": {
+        "throughput": 2627,
+        "errorRate": 100,
+        "avgResponseTime": 3.8,
+        "p95ResponseTime": 4.94,
+        "maxResponseTime": 6.2
+      }
+    },
+    {
+      "timestamp": 1765112261268,
+      "phase": "Ramp Up",
+      "targetLoad": 28,
+      "actualLoad": 28,
+      "requests": 1985,
+      "errors": 1849,
+      "stats": {
+        "throughput": 1985,
+        "errorRate": 93.15,
+        "avgResponseTime": 14.06,
+        "p95ResponseTime": 46.76,
+        "maxResponseTime": 86.05
+      }
+    },
+    {
+      "timestamp": 1765112262273,
+      "phase": "Ramp Up",
+      "targetLoad": 46,
+      "actualLoad": 46,
+      "requests": 2529,
+      "errors": 2529,
+      "stats": {
+        "throughput": 2529,
+        "errorRate": 100,
+        "avgResponseTime": 18.26,
+        "p95ResponseTime": 27.85,
+        "maxResponseTime": 36.89
+      }
+    },
+    {
+      "timestamp": 1765112263276,
+      "phase": "Ramp Up",
+      "targetLoad": 64,
+      "actualLoad": 64,
+      "requests": 2052,
+      "errors": 1920,
+      "stats": {
+        "throughput": 2052,
+        "errorRate": 93.57,
+        "avgResponseTime": 30.98,
+        "p95ResponseTime": 103.82,
+        "maxResponseTime": 155.38
+      }
+    },
+    {
+      "timestamp": 1765112264279,
+      "phase": "Ramp Up",
+      "targetLoad": 82,
+      "actualLoad": 82,
+      "requests": 2706,
+      "errors": 2706,
+      "stats": {
+        "throughput": 2706,
+        "errorRate": 100,
+        "avgResponseTime": 30.11,
+        "p95ResponseTime": 34.79,
+        "maxResponseTime": 39.57
+      }
+    },
+    {
+      "timestamp": 1765112265281,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2132,
+      "errors": 1998,
+      "stats": {
+        "throughput": 2132,
+        "errorRate": 93.71,
+        "avgResponseTime": 47.22,
+        "p95ResponseTime": 153.44,
+        "maxResponseTime": 233.48
+      }
+    },
+    {
+      "timestamp": 1765112266281,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2702,
+      "errors": 2702,
+      "stats": {
+        "throughput": 2702,
+        "errorRate": 100,
+        "avgResponseTime": 36.88,
+        "p95ResponseTime": 42.79,
+        "maxResponseTime": 45.92
+      }
+    },
+    {
+      "timestamp": 1765112267290,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 1930,
+      "errors": 1800,
+      "stats": {
+        "throughput": 1930,
+        "errorRate": 93.26,
+        "avgResponseTime": 51.26,
+        "p95ResponseTime": 161.74,
+        "maxResponseTime": 236.51
+      }
+    },
+    {
+      "timestamp": 1765112268294,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2798,
+      "errors": 2798,
+      "stats": {
+        "throughput": 2798,
+        "errorRate": 100,
+        "avgResponseTime": 36.92,
+        "p95ResponseTime": 42.43,
+        "maxResponseTime": 52
+      }
+    },
+    {
+      "timestamp": 1765112269300,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2130,
+      "errors": 2003,
+      "stats": {
+        "throughput": 2130,
+        "errorRate": 94.04,
+        "avgResponseTime": 46.72,
+        "p95ResponseTime": 151.4,
+        "maxResponseTime": 233.41
+      }
+    },
+    {
+      "timestamp": 1765112270306,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2799,
+      "errors": 2799,
+      "stats": {
+        "throughput": 2799,
+        "errorRate": 100,
+        "avgResponseTime": 36.54,
+        "p95ResponseTime": 40.81,
+        "maxResponseTime": 50.81
+      }
+    },
+    {
+      "timestamp": 1765112271321,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2130,
+      "errors": 2000,
+      "stats": {
+        "throughput": 2130,
+        "errorRate": 93.9,
+        "avgResponseTime": 47.68,
+        "p95ResponseTime": 167.88,
+        "maxResponseTime": 241.36
+      }
+    },
+    {
+      "timestamp": 1765112272340,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2598,
+      "errors": 2598,
+      "stats": {
+        "throughput": 2598,
+        "errorRate": 100,
+        "avgResponseTime": 39.03,
+        "p95ResponseTime": 66.37,
+        "maxResponseTime": 76.25
+      }
+    },
+    {
+      "timestamp": 1765112273349,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2391,
+      "errors": 2301,
+      "stats": {
+        "throughput": 2391,
+        "errorRate": 96.24,
+        "avgResponseTime": 38.38,
+        "p95ResponseTime": 41.96,
+        "maxResponseTime": 194.17
+      }
+    },
+    {
+      "timestamp": 1765112274354,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2540,
+      "errors": 2500,
+      "stats": {
+        "throughput": 2540,
+        "errorRate": 98.43,
+        "avgResponseTime": 42.42,
+        "p95ResponseTime": 46.12,
+        "maxResponseTime": 213.54
+      }
+    },
+    {
+      "timestamp": 1765112275354,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2466,
+      "errors": 2400,
+      "stats": {
+        "throughput": 2466,
+        "errorRate": 97.32,
+        "avgResponseTime": 37.48,
+        "p95ResponseTime": 39.81,
+        "maxResponseTime": 170.74
+      }
+    },
+    {
+      "timestamp": 1765112276355,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2363,
+      "errors": 2299,
+      "stats": {
+        "throughput": 2363,
+        "errorRate": 97.29,
+        "avgResponseTime": 45.67,
+        "p95ResponseTime": 127.5,
+        "maxResponseTime": 225.32
+      }
+    },
+    {
+      "timestamp": 1765112277358,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2635,
+      "errors": 2635,
+      "stats": {
+        "throughput": 2635,
+        "errorRate": 100,
+        "avgResponseTime": 36.55,
+        "p95ResponseTime": 42.44,
+        "maxResponseTime": 45.3
+      }
+    },
+    {
+      "timestamp": 1765112278360,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2129,
+      "errors": 2000,
+      "stats": {
+        "throughput": 2129,
+        "errorRate": 93.94,
+        "avgResponseTime": 49.17,
+        "p95ResponseTime": 155.79,
+        "maxResponseTime": 218.65
+      }
+    },
+    {
+      "timestamp": 1765112279370,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2700,
+      "errors": 2700,
+      "stats": {
+        "throughput": 2700,
+        "errorRate": 100,
+        "avgResponseTime": 37.23,
+        "p95ResponseTime": 40.9,
+        "maxResponseTime": 46.6
+      }
+    },
+    {
+      "timestamp": 1765112280374,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 1874,
+      "errors": 1744,
+      "stats": {
+        "throughput": 1874,
+        "errorRate": 93.06,
+        "avgResponseTime": 52.56,
+        "p95ResponseTime": 172.18,
+        "maxResponseTime": 232.02
+      }
+    },
+    {
+      "timestamp": 1765112281375,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2698,
+      "errors": 2698,
+      "stats": {
+        "throughput": 2698,
+        "errorRate": 100,
+        "avgResponseTime": 38.01,
+        "p95ResponseTime": 41.82,
+        "maxResponseTime": 58.82
+      }
+    },
+    {
+      "timestamp": 1765112282382,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2011,
+      "errors": 1886,
+      "stats": {
+        "throughput": 2011,
+        "errorRate": 93.78,
+        "avgResponseTime": 50.04,
+        "p95ResponseTime": 157.81,
+        "maxResponseTime": 230.14
+      }
+    },
+    {
+      "timestamp": 1765112283383,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2802,
+      "errors": 2802,
+      "stats": {
+        "throughput": 2802,
+        "errorRate": 100,
+        "avgResponseTime": 35.62,
+        "p95ResponseTime": 41.3,
+        "maxResponseTime": 47.2
+      }
+    },
+    {
+      "timestamp": 1765112284389,
+      "phase": "Sustained Spike",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2029,
+      "errors": 1899,
+      "stats": {
+        "throughput": 2029,
+        "errorRate": 93.59,
+        "avgResponseTime": 48.72,
+        "p95ResponseTime": 159.08,
+        "maxResponseTime": 243.29
+      }
+    },
+    {
+      "timestamp": 1765112286403,
+      "phase": "Ramp Down",
+      "targetLoad": 100,
+      "actualLoad": 100,
+      "requests": 2022,
+      "errors": 1898,
+      "stats": {
+        "throughput": 2022,
+        "errorRate": 93.87,
+        "avgResponseTime": 49.75,
+        "p95ResponseTime": 153.72,
+        "maxResponseTime": 237.29
+      }
+    },
+    {
+      "timestamp": 1765112287417,
+      "phase": "Ramp Down",
+      "targetLoad": 82,
+      "actualLoad": 100,
+      "requests": 2701,
+      "errors": 2701,
+      "stats": {
+        "throughput": 2701,
+        "errorRate": 100,
+        "avgResponseTime": 36.56,
+        "p95ResponseTime": 41.43,
+        "maxResponseTime": 57.07
+      }
+    },
+    {
+      "timestamp": 1765112288429,
+      "phase": "Ramp Down",
+      "targetLoad": 63,
+      "actualLoad": 100,
+      "requests": 2054,
+      "errors": 1924,
+      "stats": {
+        "throughput": 2054,
+        "errorRate": 93.67,
+        "avgResponseTime": 48.99,
+        "p95ResponseTime": 157.37,
+        "maxResponseTime": 203.72
+      }
+    },
+    {
+      "timestamp": 1765112289434,
+      "phase": "Ramp Down",
+      "targetLoad": 45,
+      "actualLoad": 100,
+      "requests": 2698,
+      "errors": 2698,
+      "stats": {
+        "throughput": 2698,
+        "errorRate": 100,
+        "avgResponseTime": 37.26,
+        "p95ResponseTime": 42.81,
+        "maxResponseTime": 61.73
+      }
+    },
+    {
+      "timestamp": 1765112290438,
+      "phase": "Ramp Down",
+      "targetLoad": 27,
+      "actualLoad": 100,
+      "requests": 2225,
+      "errors": 2098,
+      "stats": {
+        "throughput": 2225,
+        "errorRate": 94.29,
+        "avgResponseTime": 46.18,
+        "p95ResponseTime": 138.56,
+        "maxResponseTime": 222.79
+      }
+    },
+    {
+      "timestamp": 1765112291444,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2600,
+      "errors": 2600,
+      "stats": {
+        "throughput": 2600,
+        "errorRate": 100,
+        "avgResponseTime": 37.95,
+        "p95ResponseTime": 48.21,
+        "maxResponseTime": 53.27
+      }
+    },
+    {
+      "timestamp": 1765112292445,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2010,
+      "errors": 1900,
+      "stats": {
+        "throughput": 2010,
+        "errorRate": 94.53,
+        "avgResponseTime": 49.28,
+        "p95ResponseTime": 161.19,
+        "maxResponseTime": 280.86
+      }
+    },
+    {
+      "timestamp": 1765112293447,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2698,
+      "errors": 2698,
+      "stats": {
+        "throughput": 2698,
+        "errorRate": 100,
+        "avgResponseTime": 38.43,
+        "p95ResponseTime": 48.04,
+        "maxResponseTime": 53.34
+      }
+    },
+    {
+      "timestamp": 1765112294460,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2128,
+      "errors": 2004,
+      "stats": {
+        "throughput": 2128,
+        "errorRate": 94.17,
+        "avgResponseTime": 43.05,
+        "p95ResponseTime": 96.3,
+        "maxResponseTime": 229.38
+      }
+    },
+    {
+      "timestamp": 1765112295461,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2605,
+      "errors": 2599,
+      "stats": {
+        "throughput": 2605,
+        "errorRate": 99.77,
+        "avgResponseTime": 41.03,
+        "p95ResponseTime": 50.41,
+        "maxResponseTime": 193.47
+      }
+    },
+    {
+      "timestamp": 1765112296465,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2481,
+      "errors": 2400,
+      "stats": {
+        "throughput": 2481,
+        "errorRate": 96.74,
+        "avgResponseTime": 37.7,
+        "p95ResponseTime": 43.38,
+        "maxResponseTime": 187.86
+      }
+    },
+    {
+      "timestamp": 1765112297467,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2347,
+      "errors": 2298,
+      "stats": {
+        "throughput": 2347,
+        "errorRate": 97.91,
+        "avgResponseTime": 46.54,
+        "p95ResponseTime": 85.49,
+        "maxResponseTime": 216.39
+      }
+    },
+    {
+      "timestamp": 1765112298474,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2620,
+      "errors": 2600,
+      "stats": {
+        "throughput": 2620,
+        "errorRate": 99.24,
+        "avgResponseTime": 35.81,
+        "p95ResponseTime": 40.32,
+        "maxResponseTime": 82.1
+      }
+    },
+    {
+      "timestamp": 1765112299475,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2299,
+      "errors": 2199,
+      "stats": {
+        "throughput": 2299,
+        "errorRate": 95.65,
+        "avgResponseTime": 45.97,
+        "p95ResponseTime": 140.38,
+        "maxResponseTime": 235.04
+      }
+    },
+    {
+      "timestamp": 1765112300478,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2700,
+      "errors": 2700,
+      "stats": {
+        "throughput": 2700,
+        "errorRate": 100,
+        "avgResponseTime": 37.24,
+        "p95ResponseTime": 49.13,
+        "maxResponseTime": 62.38
+      }
+    },
+    {
+      "timestamp": 1765112301483,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 1964,
+      "errors": 1834,
+      "stats": {
+        "throughput": 1964,
+        "errorRate": 93.38,
+        "avgResponseTime": 50.65,
+        "p95ResponseTime": 174.91,
+        "maxResponseTime": 236.03
+      }
+    },
+    {
+      "timestamp": 1765112302490,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2898,
+      "errors": 2898,
+      "stats": {
+        "throughput": 2898,
+        "errorRate": 100,
+        "avgResponseTime": 35.73,
+        "p95ResponseTime": 41.26,
+        "maxResponseTime": 54.07
+      }
+    },
+    {
+      "timestamp": 1765112303505,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 1970,
+      "errors": 1841,
+      "stats": {
+        "throughput": 1970,
+        "errorRate": 93.45,
+        "avgResponseTime": 49.78,
+        "p95ResponseTime": 169.32,
+        "maxResponseTime": 236.08
+      }
+    },
+    {
+      "timestamp": 1765112304510,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2800,
+      "errors": 2800,
+      "stats": {
+        "throughput": 2800,
+        "errorRate": 100,
+        "avgResponseTime": 36.26,
+        "p95ResponseTime": 39.45,
+        "maxResponseTime": 46.32
+      }
+    },
+    {
+      "timestamp": 1765112305521,
+      "phase": "Recovery",
+      "targetLoad": 10,
+      "actualLoad": 100,
+      "requests": 2022,
+      "errors": 1900,
+      "stats": {
+        "throughput": 2022,
+        "errorRate": 93.97,
+        "avgResponseTime": 49.56,
+        "p95ResponseTime": 170.02,
+        "maxResponseTime": 283.04
+      }
+    }
+  ]
+}

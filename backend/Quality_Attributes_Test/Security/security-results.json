@@ -1,0 +1,72 @@
+{
+  "timestamp": "2025-12-07T13:15:25.448Z",
+  "summary": {
+    "totalScore": 72,
+    "maxScore": 100
+  },
+  "elements": {
+    "confidentiality": {
+      "score": 17,
+      "findings": [
+        "✅ Password hashing (bcrypt) implemented",
+        "✅ Environment variables for secrets",
+        "⚠️ No explicit data encryption",
+        "✅ HTTPS/TLS capable",
+        "✅ No hardcoded secrets detected"
+      ],
+      "vulnerabilities": []
+    },
+    "integrity": {
+      "score": 13,
+      "findings": [
+        "✅ Input validation present",
+        "✅ SQL parameterization used",
+        "⚠️ No explicit XSS protection",
+        "⚠️ No CSRF tokens"
+      ],
+      "vulnerabilities": []
+    },
+    "availability": {
+      "score": 8,
+      "findings": [
+        "✅ Error handling implemented",
+        "❌ No rate limiting (DoS vulnerable)",
+        "⚠️ No timeout configuration",
+        "⚠️ No health check endpoint"
+      ],
+      "vulnerabilities": [
+        "No rate limiting"
+      ]
+    },
+    "authentication": {
+      "score": 14,
+      "findings": [
+        "✅ JWT authentication implemented",
+        "⚠️ JWT secret may not be secure",
+        "⚠️ No password policy",
+        "✅ Role-based access control (Admin/User)",
+        "⚠️ Stateless auth only"
+      ],
+      "vulnerabilities": [
+        {
+          "file": "Sign_in_Controller.ts",
+          "issue": "Possible hardcoded JWT secret"
+        },
+        {
+          "file": "Sign_up_Controller.ts",
+          "issue": "Possible hardcoded JWT secret"
+        }
+      ]
+    },
+    "nonRepudiation": {
+      "score": 20,
+      "findings": [
+        "✅ Application logging enabled",
+        "✅ Audit trail capabilities",
+        "✅ Timestamp tracking on records",
+        "✅ User action tracking (UserID references)"
+      ],
+      "vulnerabilities": []
+    }
+  }
+}

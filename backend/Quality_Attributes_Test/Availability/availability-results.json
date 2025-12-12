@@ -1,0 +1,95 @@
+{
+  "testTime": "2025-12-07T00:37:35.018Z",
+  "config": {
+    "PROBE_INTERVAL": 1000,
+    "HEALTH_ENDPOINTS": [
+      {
+        "path": "/api/Flights/GetAllFlights",
+        "name": "Flights API"
+      },
+      {
+        "path": "/api/Offers/GetAllOffers",
+        "name": "Offers API"
+      }
+    ],
+    "TIMEOUT_MS": 5000,
+    "MAX_ACCEPTABLE_LATENCY": 500,
+    "BASELINE_DURATION": 60000,
+    "STRESS_DURATION": 60000,
+    "RECOVERY_DURATION": 30000
+  },
+  "scenarios": {
+    "baseline": {
+      "monitorDuration": {
+        "ms": 60958,
+        "formatted": "1m 0.96s"
+      },
+      "uptimeRate": 80,
+      "downtimeTime": {
+        "ms": 12258,
+        "formatted": "12.26s"
+      },
+      "errorFrequency": {
+        "perMinute": 23.62,
+        "total": 24
+      },
+      "probes": {
+        "total": 120,
+        "successful": 96,
+        "degraded": 0,
+        "failed": 24
+      },
+      "avgResponseTime": 3.75,
+      "stateTransitions": 18,
+      "downtimePeriods": 9
+    },
+    "stress": {
+      "monitorDuration": {
+        "ms": 60646,
+        "formatted": "1m 0.65s"
+      },
+      "uptimeRate": 5.36,
+      "downtimeTime": {
+        "ms": 59023,
+        "formatted": "59.02s"
+      },
+      "errorFrequency": {
+        "perMinute": 104.87,
+        "total": 106
+      },
+      "probes": {
+        "total": 112,
+        "successful": 6,
+        "degraded": 0,
+        "failed": 106
+      },
+      "avgResponseTime": 38.81,
+      "stateTransitions": 9,
+      "downtimePeriods": 5
+    },
+    "recovery": {
+      "monitorDuration": {
+        "ms": 30397,
+        "formatted": "30.40s"
+      },
+      "uptimeRate": 66.67,
+      "downtimeTime": {
+        "ms": 8110,
+        "formatted": "8.11s"
+      },
+      "errorFrequency": {
+        "perMinute": 39.48,
+        "total": 20
+      },
+      "probes": {
+        "total": 60,
+        "successful": 40,
+        "degraded": 0,
+        "failed": 20
+      },
+      "avgResponseTime": 3.23,
+      "stateTransitions": 8,
+      "downtimePeriods": 4
+    }
+  }
+}

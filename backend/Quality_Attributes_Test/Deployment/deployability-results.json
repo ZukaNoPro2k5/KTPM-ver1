@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-12-07T12:28:54.203Z",
+  "deploymentTime": {
+    "total": 72346,
+    "formatted": "1m 12s",
+    "breakdown": [
+      {
+        "step": "Backend npm install",
+        "duration": 1758,
+        "formatted": "1.76s",
+        "success": true
+      },
+      {
+        "step": "Frontend npm install",
+        "duration": 13969,
+        "formatted": "13.97s",
+        "success": true
+      },
+      {
+        "step": "Frontend build",
+        "duration": 26619,
+        "formatted": "26.62s",
+        "success": true
+      },
+      {
+        "step": "Backend startup",
+        "duration": 30000,
+        "formatted": "30.00s",
+        "success": false
+      }
+    ]
+  },
+  "rollbackAbility": {
+    "score": 70,
+    "git": {
+      "hasGit": true,
+      "totalCommits": 2,
+      "lastCommits": [
+        "142a2f2 Done",
+        "7592972 Finish"
+      ],
+      "hasTags": false,
+      "tags": [],
+      "hasBranches": true,
+      "branches": [
+        "* main",
+        "remotes/origin/HEAD -> origin/main",
+        "remotes/origin/feature/qairline-implementation",
+        "remotes/origin/main"
+      ],
+      "canRollback": true,
+      "rollbackMethod": "git checkout/revert"
+    },
+    "docker": {
+      "hasDocker": true,
+      "hasDockerCompose": true,
+      "images": [],
+      "canRollback": true,
+      "rollbackMethod": "docker-compose with tagged images",
+      "dockerfileAnalysis": {
+        "backend": {
+          "exists": true,
+          "baseImage": "node:20.16.0-alpine",
+          "hasHealthCheck": false,
+          "hasMultiStage": false
+        },
+        "frontend": {
+          "exists": true,
+          "baseImage": "node:20.16.0-alpine",
+          "hasHealthCheck": false,
+          "hasMultiStage": false
+        }
+      }
+    },
+    "database": {
+      "hasMigrations": true,
+      "migrationTool": "Manual SQL file",
+      "canRollbackSchema": false,
+      "hasBackupScript": false
+    }
+  }
+}

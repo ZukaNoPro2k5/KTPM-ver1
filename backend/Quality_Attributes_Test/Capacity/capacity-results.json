@@ -1,0 +1,140 @@
+{
+  "testConfig": {
+    "STAGE_DURATION": 15000,
+    "CONCURRENCY_LEVELS": [
+      1,
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100
+    ],
+    "TARGET_ENDPOINT": {
+      "method": "GET",
+      "path": "/api/Flights/GetAllFlights"
+    },
+    "ERROR_THRESHOLD": 5,
+    "P95_THRESHOLD": 1000
+  },
+  "timestamp": "2025-12-07T00:01:32.433Z",
+  "targetEndpoint": {
+    "method": "GET",
+    "path": "/api/Flights/GetAllFlights"
+  },
+  "stages": [
+    {
+      "concurrency": 1,
+      "totalRequests": 17018,
+      "throughput": 1134.53,
+      "errorRate": 95.49,
+      "count": 17018,
+      "min": 0.51,
+      "max": 36.99,
+      "avg": 0.87,
+      "median": 0.77,
+      "p90": 1.1,
+      "p95": 1.44
+    },
+    {
+      "concurrency": 5,
+      "totalRequests": 24217,
+      "throughput": 1614.36,
+      "errorRate": 96.9,
+      "count": 24217,
+      "min": 1.36,
+      "max": 51.89,
+      "avg": 3.08,
+      "median": 3.07,
+      "p90": 3.94,
+      "p95": 4.25
+    },
+    {
+      "concurrency": 10,
+      "totalRequests": 20521,
+      "throughput": 1367.7,
+      "errorRate": 97.4,
+      "count": 20521,
+      "min": 3.63,
+      "max": 69.64,
+      "avg": 7.29,
+      "median": 6.96,
+      "p90": 7.88,
+      "p95": 8.36
+    },
+    {
+      "concurrency": 20,
+      "totalRequests": 20914,
+      "throughput": 1393.52,
+      "errorRate": 97.55,
+      "count": 20914,
+      "min": 4.2,
+      "max": 99.08,
+      "avg": 14.33,
+      "median": 13.57,
+      "p90": 15.15,
+      "p95": 15.72
+    },
+    {
+      "concurrency": 30,
+      "totalRequests": 21456,
+      "throughput": 1425.27,
+      "errorRate": 97.43,
+      "count": 21456,
+      "min": 7.39,
+      "max": 128.44,
+      "avg": 21,
+      "median": 19.85,
+      "p90": 21.98,
+      "p95": 22.65
+    },
+    {
+      "concurrency": 50,
+      "totalRequests": 21110,
+      "throughput": 1405.74,
+      "errorRate": 97.29,
+      "count": 21110,
+      "min": 4.51,
+      "max": 184.41,
+      "avg": 35.54,
+      "median": 33.18,
+      "p90": 37.01,
+      "p95": 39.2
+    },
+    {
+      "concurrency": 75,
+      "totalRequests": 21798,
+      "throughput": 1449.24,
+      "errorRate": 97.81,
+      "count": 21798,
+      "min": 8.04,
+      "max": 238.48,
+      "avg": 51.71,
+      "median": 48.95,
+      "p90": 53.66,
+      "p95": 55.67
+    },
+    {
+      "concurrency": 100,
+      "totalRequests": 21951,
+      "throughput": 1461.16,
+      "errorRate": 97.88,
+      "count": 21951,
+      "min": 5.63,
+      "max": 312.47,
+      "avg": 68.34,
+      "median": 64.65,
+      "p90": 70.81,
+      "p95": 73.09
+    }
+  ],
+  "summary": {
+    "maxThroughput": 1614.36,
+    "breakingPoint": {
+      "type": "throughput_plateau",
+      "concurrency": 10,
+      "details": "Throughput plateaued at 1367.7 RPS (previous: 1614.36 RPS)"
+    }
+  }
+}
