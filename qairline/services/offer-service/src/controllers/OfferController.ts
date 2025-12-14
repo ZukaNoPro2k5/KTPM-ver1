@@ -11,8 +11,12 @@ export class OfferController {
 
   // Lay tat ca offers (public - khong can dang nhap)
   async getAllOffers(req: Request, res: Response): Promise<void> {
-    const cacheKey = 'offers:all';
-    
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+
+    const cacheKey = `offers:all:${page}:${limit}`;
+
     // Try to get from cache first
     const cachedData = await cacheService.get(cacheKey);
     if (cachedData) {
@@ -20,26 +24,48 @@ export class OfferController {
       return;
     }
 
-    const query = 'SELECT PostID, Title, Content, PostDate FROM Offers';
-    
-    connection.query(query, async (err, results) => {
-      if (err) {
-        console.error('Error executing query:', err.stack);
-        res.status(500).json({ message: 'Internal Server Error', error: err.message });
-        return;
+    const countQuery = 'SELECT COUNT(*) as total FROM Offers';
+
+    connection.query(countQuery, (countErr: any, countResults: any) => {
+      if (countErr) {
+        console.error('Error counting offers:', countErr);
+        return res.status(500).json({ message: 'Internal Server Error' });
       }
 
-      // Nếu không có kết quả
-      if ((results as any).length === 0) {
-        res.status(404).json({ message: 'No offers found' });
-        return;
-      }
+      const totalItems = countResults[0].total;
+      const totalPages = Math.ceil(totalItems / limit);
 
-      // Save to cache for 1 hour (offers change infrequently)
-      await cacheService.set(cacheKey, JSON.stringify(results), 3600);
+      const query = 'SELECT PostID, Title, Content, PostDate FROM Offers LIMIT ? OFFSET ?';
 
-      // Trả về tất cả các offers
-      res.status(200).json(results);
+      connection.query(query, [limit, offset], async (err: any, results) => {
+        if (err) {
+          console.error('Error executing query:', err.stack);
+          res.status(500).json({ message: 'Internal Server Error', error: err.message });
+          return;
+        }
+
+        // Nếu không có kết quả
+        if ((results as any).length === 0) {
+          res.status(404).json({ message: 'No offers found' });
+          return;
+        }
+
+        const response = {
+          data: results,
+          pagination: {
+            totalItems,
+            totalPages,
+            currentPage: page,
+            itemsPerPage: limit
+          }
+        };
+
+        // Save to cache for 1 hour (offers change infrequently)
+        await cacheService.set(cacheKey, JSON.stringify(response), 3600);
+
+        // Trả về tất cả các offers
+        res.status(200).json(response);
+      });
     });
   }
 
@@ -55,7 +81,7 @@ export class OfferController {
     try {
       // Kiem tra admin via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -104,9 +130,9 @@ export class OfferController {
 
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -123,7 +149,7 @@ export class OfferController {
     try {
       // Kiem tra admin via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${UserID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -165,9 +191,9 @@ export class OfferController {
 
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }

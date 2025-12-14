@@ -20,7 +20,7 @@ export class BookingController {
     try {
       // Verify user exists via User Service
       const userResponse = await axios.get(`${this.userServiceUrl}/api/users/${bookingData.userID}`);
-      
+
       if (!userResponse.data) {
         res.status(404).json({ message: 'User not found' });
         return;
@@ -28,7 +28,7 @@ export class BookingController {
 
       // Verify flight exists and has seats via Flight Service
       const flightResponse = await axios.get(`${this.flightServiceUrl}/api/Flights/${bookingData.flightID}`);
-      
+
       if (!flightResponse.data) {
         res.status(404).json({ message: 'Flight not found' });
         return;
@@ -41,7 +41,7 @@ export class BookingController {
 
       // Create booking
       const query = 'INSERT INTO Bookings (UserID, FlightID, BookingStatus, PaymentStatus) VALUES (?, ?, ?, ?)';
-      
+
       connection.execute(
         query,
         [bookingData.userID, bookingData.flightID, 'pending', 'unpaid'],
@@ -57,21 +57,21 @@ export class BookingController {
           // Reserve seat via Flight Service
           try {
             await axios.post(`${this.flightServiceUrl}/api/Flights/${bookingData.flightID}/reserve-seat`);
-            
+
             res.status(201).json({
               message: 'Booking created successfully',
               bookingId
             });
           } catch (reserveError: any) {
             console.error('Error reserving seat:', reserveError.message);
-            
+
             // Compensating transaction: Delete booking if reserve seat fails
             connection.execute('DELETE FROM Bookings WHERE BookingID = ?', [bookingId], (deleteErr) => {
               if (deleteErr) {
                 console.error('Error rolling back booking:', deleteErr);
               }
             });
-            
+
             res.status(500).json({ message: 'Error reserving seat, booking cancelled' });
           }
         }
@@ -79,55 +79,103 @@ export class BookingController {
 
     } catch (error: any) {
       console.error('Service communication error:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error communicating with other services',
-        error: error.message 
+        error: error.message
       });
     }
   }
 
   // Lay tat ca bookings (Admin only - dung de quan ly)
   getAllBookings(req: Request, res: Response): void {
-    const query = 'SELECT * FROM Bookings';
-    connection.query(query, (err, results) => {
-      if (err) {
-        console.error('Error executing query:', err.stack);
-        res.status(500).json({ message: 'Internal Server Error', error: err.message });
-        return;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+
+    const countQuery = 'SELECT COUNT(*) as total FROM Bookings';
+
+    connection.query(countQuery, (countErr: any, countResults: any) => {
+      if (countErr) {
+        console.error('Error counting bookings:', countErr);
+        return res.status(500).json({ message: 'Internal Server Error' });
       }
 
-      if ((results as any).length === 0) {
-        res.status(404).json({ message: 'No bookings found' });
-        return;
-      }
+      const totalItems = countResults[0].total;
+      const totalPages = Math.ceil(totalItems / limit);
 
-      res.status(200).json(results);
+      const query = 'SELECT * FROM Bookings LIMIT ? OFFSET ?';
+
+      connection.query(query, [limit, offset], (err: any, results) => {
+        if (err) {
+          console.error('Error executing query:', err.stack);
+          res.status(500).json({ message: 'Internal Server Error', error: err.message });
+          return;
+        }
+
+        if ((results as any).length === 0) {
+          res.status(404).json({ message: 'No bookings found' });
+          return;
+        }
+
+        res.status(200).json({
+          data: results,
+          pagination: {
+            totalItems,
+            totalPages,
+            currentPage: page,
+            itemsPerPage: limit
+          }
+        });
+      });
     });
   }
 
   // Lay bookings cua 1 user cu the (User xem bookings cua minh)
   getUserBookings(req: Request, res: Response): void {
     const { userId } = req.params;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
 
     if (!userId) {
       res.status(400).json({ message: 'Missing user ID' });
       return;
     }
 
-    const query = 'SELECT * FROM Bookings WHERE UserID = ?';
-    connection.execute(query, [userId], (err, results) => {
-      if (err) {
-        console.error('Error fetching user bookings:', err);
-        res.status(500).json({ message: 'Error fetching bookings', error: err.message });
-        return;
+    const countQuery = 'SELECT COUNT(*) as total FROM Bookings WHERE UserID = ?';
+
+    connection.execute(countQuery, [userId], (countErr: any, countResults: any) => {
+      if (countErr) {
+        console.error('Error counting user bookings:', countErr);
+        return res.status(500).json({ message: 'Internal Server Error' });
       }
 
-      if ((results as any).length === 0) {
-        res.status(404).json({ message: 'No bookings found for this user' });
-        return;
-      }
+      const totalItems = countResults[0].total;
+      const totalPages = Math.ceil(totalItems / limit);
 
-      res.status(200).json(results);
+      const query = 'SELECT * FROM Bookings WHERE UserID = ? LIMIT ? OFFSET ?';
+      connection.execute(query, [userId, limit, offset], (err: any, results) => {
+        if (err) {
+          console.error('Error fetching user bookings:', err);
+          res.status(500).json({ message: 'Error fetching bookings', error: err.message });
+          return;
+        }
+
+        if ((results as any).length === 0) {
+          res.status(404).json({ message: 'No bookings found for this user' });
+          return;
+        }
+
+        res.status(200).json({
+          data: results,
+          pagination: {
+            totalItems,
+            totalPages,
+            currentPage: page,
+            itemsPerPage: limit
+          }
+        });
+      });
     });
   }
 
@@ -356,7 +404,7 @@ export class BookingController {
     try {
       // Check admin role via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -425,9 +473,9 @@ export class BookingController {
       });
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -436,7 +484,7 @@ export class BookingController {
   // NOTE: Method nay van query truc tiep vao Users va Flights tables (vi day la legacy code)
   // Nen dung method createBooking() thay the (da duoc cap nhat de goi microservices)
   bookFlight(req: Request, res: Response): void {
-    res.status(410).json({ 
+    res.status(410).json({
       message: 'This endpoint is deprecated. Please use POST /api/Bookings/create instead.',
       hint: 'The new endpoint uses microservices architecture and communicates via REST APIs.'
     });

@@ -16,8 +16,13 @@ export class FlightController {
 
   // Lay tat ca flights (public - guest co the xem)
   async getAllFlights(req: Request, res: Response): Promise<void> {
-    const cacheKey = 'flights:all';
-    
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+    const status = req.query.status as string;
+
+    const cacheKey = `flights:all:${page}:${limit}:${status || 'all'}`;
+
     // Try to get from cache first
     const cachedData = await cacheService.get(cacheKey);
     if (cachedData) {
@@ -25,31 +30,68 @@ export class FlightController {
       return;
     }
 
-    const query = `
-      SELECT 
-        f.FlightID, 
-        a.Model AS AircraftModel, 
-        f.Departure, 
-        f.Arrival, 
-        f.DepartureTime, 
-        f.ArrivalTime, 
-        f.Price, 
-        f.SeatsAvailable, 
-        f.Status
-      FROM Flights f
-      JOIN Aircrafts a ON f.AircraftTypeID = a.AircraftID
-    `;
-    
-    connection.query(query, async (err, results) => {
-      if (err) {
-        console.error('Error executing query:', err.stack);
+    // Build query conditions
+    let whereClause = '';
+    const queryParams: any[] = [];
+
+    if (status) {
+      whereClause = 'WHERE f.Status = ?';
+      queryParams.push(status);
+    }
+
+    // Count total constraints
+    const countQuery = `SELECT COUNT(*) as total FROM Flights f ${whereClause}`;
+
+    connection.query(countQuery, queryParams, (countErr: any, countResults: any) => {
+      if (countErr) {
+        console.error('Error counting flights:', countErr);
         return res.status(500).send('Internal Server Error');
       }
-      
-      // Save to cache for 5 minutes
-      await cacheService.set(cacheKey, JSON.stringify(results), 300);
-      
-      res.json(results);
+
+      const totalItems = countResults[0].total;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      const query = `
+        SELECT 
+          f.FlightID, 
+          a.Model AS AircraftModel, 
+          f.Departure, 
+          f.Arrival, 
+          f.DepartureTime, 
+          f.ArrivalTime, 
+          f.Price, 
+          f.SeatsAvailable, 
+          f.Status
+        FROM Flights f
+        JOIN Aircrafts a ON f.AircraftTypeID = a.AircraftID
+        ${whereClause}
+        LIMIT ? OFFSET ?
+      `;
+
+      // Add limit and offset to params
+      const finalParams = [...queryParams, limit, offset];
+
+      connection.query(query, finalParams, async (err: any, results: any) => {
+        if (err) {
+          console.error('Error executing query:', err.stack);
+          return res.status(500).send('Internal Server Error');
+        }
+
+        const response = {
+          data: results,
+          pagination: {
+            totalItems,
+            totalPages,
+            currentPage: page,
+            itemsPerPage: limit
+          }
+        };
+
+        // Save to cache for 5 minutes
+        await cacheService.set(cacheKey, JSON.stringify(response), 300);
+
+        res.json(response);
+      });
     });
   }
 
@@ -66,7 +108,7 @@ export class FlightController {
     try {
       // Kiem tra user co phai Admin khong via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -96,9 +138,9 @@ export class FlightController {
       }
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -160,7 +202,7 @@ export class FlightController {
     try {
       // Buoc 2: Kiem tra user co phai Admin khong via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -197,9 +239,9 @@ export class FlightController {
       });
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -222,7 +264,7 @@ export class FlightController {
     try {
       // Buoc 2: Kiem tra user co phai Admin khong via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -259,9 +301,9 @@ export class FlightController {
       });
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -278,7 +320,7 @@ export class FlightController {
     if (flightID) {
       const cacheKey = `flight:${flightID}`;
       const cachedData = await cacheService.get(cacheKey);
-      
+
       if (cachedData) {
         res.status(200).json(JSON.parse(cachedData));
         return;
@@ -293,7 +335,7 @@ export class FlightController {
         JOIN Aircrafts a ON f.AircraftTypeID = a.AircraftID
         WHERE f.FlightID = ?
       `;
-      
+
       connection.query(queryById, [flightID], async (err, results) => {
         if (err) {
           console.error('Error searching flight by ID:', err);
@@ -322,7 +364,7 @@ export class FlightController {
 
     const cacheKey = `flights:search:${departure}:${arrival}`;
     const cachedData = await cacheService.get(cacheKey);
-    
+
     if (cachedData) {
       res.status(200).json(JSON.parse(cachedData));
       return;
@@ -338,7 +380,7 @@ export class FlightController {
       JOIN Aircrafts a ON f.AircraftTypeID = a.AircraftID
       WHERE f.Departure = ? AND f.Arrival = ?
     `;
-    
+
     connection.execute(query, [departure, arrival], async (err, results) => {
       if (err) {
         console.error('Error searching flights:', err);
@@ -390,7 +432,7 @@ export class FlightController {
     try {
       // Buoc 2: Kiem tra user co phai Admin khong via User Service
       const userRoleResponse = await axios.get(`${this.userServiceUrl}/api/users/${userID}/role`);
-      
+
       if (userRoleResponse.data.role !== 'Admin') {
         res.status(403).json({ message: 'Permission denied: User is not an admin' });
         return;
@@ -412,10 +454,10 @@ export class FlightController {
         const currentFlight = flightResults[0];
 
         // Format dates to VN time if provided
-        const formattedDepartureTime = departureTime 
+        const formattedDepartureTime = departureTime
           ? moment(departureTime).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss')
           : undefined;
-          
+
         const formattedArrivalTime = arrivalTime
           ? moment(arrivalTime).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss')
           : undefined;
@@ -462,9 +504,9 @@ export class FlightController {
       });
     } catch (error: any) {
       console.error('Error calling User Service:', error.message);
-      res.status(500).json({ 
+      res.status(500).json({
         message: 'Error verifying user permissions',
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -549,7 +591,7 @@ export class FlightController {
           );
 
           const timestamp = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
-          res.status(200).json({ 
+          res.status(200).json({
             message: 'Flight information updated successfully and notifications sent',
             flightID,
             timestamp
